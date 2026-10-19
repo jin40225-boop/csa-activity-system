@@ -1,0 +1,131 @@
+/* ============================================================
+   設計規格 v1 · 數值 token（2026-10-15 負責人核可）
+   規則與理念見 ../../references/design-system.md
+   - 大版是預設；緊密版只用一個切換：<html class="ds-compact">
+   - 深色：跟系統（prefers-color-scheme）＋手動 <html data-theme="dark|light">
+   - 匯出（PNG／LINE／Excel 預覽）：容器加 class="ds-export"，固定淺色票不跟主題
+   - 實例可以用自己的前綴，但數值必須一致
+   ============================================================ */
+:root{
+  /* 字 */
+  --ds-font:"Microsoft JhengHei","Noto Sans TC","PingFang TC",sans-serif;
+  --ds-font-mono:Consolas,"Cascadia Mono",monospace;
+  --ds-lh:1.6;
+  --ds-fs-body:18px;      /* 內文 */
+  --ds-fs-min:14px;       /* 任何地方的最小字 */
+  --ds-fs-label:16px;     /* 欄位標籤，粗 700–800、墨色 */
+  --ds-fs-table:17px;     /* 表格內文 */
+  --ds-fs-th:15px;        /* 表頭 */
+  --ds-row-h:48px;        /* 表格列高下限 */
+  --ds-fs-h1:28px;        /* 頁面大標 */
+  --ds-fs-h2:22px;        /* 區塊標題 */
+  --ds-fs-h3:20px;        /* 小塊標題 */
+  --ds-fs-kpi:38px;       /* 數字卡數字 */
+  --ds-fs-hero:48px;      /* 問候大數字 */
+  --ds-fs-fill:20px;      /* 全版大字填寫區 */
+  --ds-h-fill:54px;       /* 全版大字輸入框高 */
+
+  /* 控制元件 */
+  --ds-h-btn:44px;  --ds-fs-btn:18px;
+  --ds-h-btn-sm:36px; --ds-fs-btn-sm:15px;
+  --ds-h-input:46px;
+  --ds-cb:22px;           /* 勾選框 */
+  --ds-h-chip:36px; --ds-fs-chip:16px;
+  --ds-h-tab:44px;  --ds-h-tab-icon:48px;
+  --ds-h-badge:28px; --ds-fs-badge:15px;
+  --ds-hit:36px;          /* 任何可點目標下限 */
+
+  /* 形狀 */
+  --ds-r-pill:999px;      /* 按鈕／頁籤／篩選／狀態章 */
+  --ds-r-input:14px;
+  --ds-r-card:16px;
+  --ds-r-window:18px;
+  --ds-bw:2px;            /* 框線 */
+  --ds-bw-strong:3px;     /* 強調、待處理橘框 */
+
+  /* 間距與版面 */
+  --ds-s1:4px; --ds-s2:8px; --ds-s3:12px; --ds-s4:16px; --ds-s5:20px; --ds-s6:24px;
+  --ds-gutter:22px;       /* 頁面左右 */
+  --ds-read-max:1100px;   /* 閱讀型表單上限；工作區不限寬 */
+  --ds-kpi-min:170px;
+  --ds-win-w:520px; --ds-win-w-work:780px; --ds-win-w-report:1080px;
+  --ds-win-max:4;         /* 同時最多 4 個浮動視窗（JS 讀） */
+
+  /* 顏色（淺色） */
+  --ds-bg:#FFF9F2; --ds-surface:#FFFFFF; --ds-soft:#FFF4E8;
+  --ds-ink:#2D251A; --ds-body:#50412E; --ds-muted:#7A6953;
+  --ds-line:#ECDFCA; --ds-line2:#E1D2B8;
+  --ds-primary:#1576C0; --ds-on-primary:#FFFFFF;   /* 白字對比 4.79 */
+  --ds-sky:#3DA5F5;                               /* 只用在框線、光暈、圖示、選中邊 */
+  --ds-ring:rgba(61,165,245,.32);
+  /* 裝飾五色：圖表、系統識別、插畫；壓白字不及格，不當按鈕底 */
+  --ds-coral:#FF6B6B; --ds-sun:#FFC24B; --ds-mint:#1FBFA8; --ds-lav:#A77BEA;
+  /* 狀態（字色＋底色成對，對比皆 ≥ 4.5） */
+  --ds-ok:#0B7566;   --ds-okbg:#E8F8F5;    /* 完成 5.11 */
+  --ds-edit:#8a5d00; --ds-editbg:#FFF5DF;  /* 待補 5.31 */
+  --ds-no:#B83A2E;   --ds-nobg:#FFECEC;    /* 停止／錯誤 5.01 */
+  --ds-pend:#A84A1C; --ds-pendbg:#FFF1E6;  /* 待處理 5.18 */
+  --ds-hold:#6b47b3; --ds-holdbg:#F4EEFD;  /* 暫緩 5.82 */
+  --ds-dot:#C8372D;                        /* 頁籤計數紅點底（白字 5.2，淺深同值） */
+
+  /* 陰影三階 */
+  --ds-shadow-card:0 4px 14px rgba(70,50,25,.06),0 1px 2px rgba(70,50,25,.03);
+  --ds-shadow-window:0 12px 28px rgba(70,50,25,.10),0 4px 12px rgba(70,50,25,.06);
+  --ds-shadow-front:0 0 0 3px rgba(61,165,245,.32),0 20px 42px rgba(70,50,25,.18);
+  color-scheme:light;
+}
+
+/* 深色：跟系統（手動選了淺色就不跟） */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ds-bg:#1C1712; --ds-surface:#28211A; --ds-soft:#30281F;
+    --ds-ink:#FFF4E8; --ds-body:#EADBC9; --ds-muted:#BFAE9A;
+    --ds-line:#3F3429; --ds-line2:#54463A;
+    --ds-primary:#5cb6f7; --ds-on-primary:#1C1712;  /* 亮藍底墨字 8.04 */
+    --ds-ring:rgba(92,182,247,.4);
+    --ds-ok:#5fd3c1; --ds-okbg:#173a35; --ds-edit:#f3c766; --ds-editbg:#3a2f16;
+    --ds-no:#ff8b8b; --ds-nobg:#3d1f1f; --ds-pend:#ff9a6b; --ds-pendbg:#3d2617;
+    --ds-hold:#c2a4f4; --ds-holdbg:#2d2440;
+    --ds-shadow-card:0 3px 10px rgba(0,0,0,.3);
+    --ds-shadow-window:0 4px 14px rgba(0,0,0,.4);
+    --ds-shadow-front:0 0 0 3px rgba(92,182,247,.4),0 10px 30px rgba(0,0,0,.5);
+    color-scheme:dark;
+  }
+}
+/* 深色：手動 ◐（與上面同值，兩處都要寫） */
+:root[data-theme="dark"]{
+  --ds-bg:#1C1712; --ds-surface:#28211A; --ds-soft:#30281F;
+  --ds-ink:#FFF4E8; --ds-body:#EADBC9; --ds-muted:#BFAE9A;
+  --ds-line:#3F3429; --ds-line2:#54463A;
+  --ds-primary:#5cb6f7; --ds-on-primary:#1C1712;
+  --ds-ring:rgba(92,182,247,.4);
+  --ds-ok:#5fd3c1; --ds-okbg:#173a35; --ds-edit:#f3c766; --ds-editbg:#3a2f16;
+  --ds-no:#ff8b8b; --ds-nobg:#3d1f1f; --ds-pend:#ff9a6b; --ds-pendbg:#3d2617;
+  --ds-hold:#c2a4f4; --ds-holdbg:#2d2440;
+  --ds-shadow-card:0 3px 10px rgba(0,0,0,.3);
+  --ds-shadow-window:0 4px 14px rgba(0,0,0,.4);
+  --ds-shadow-front:0 0 0 3px rgba(92,182,247,.4),0 10px 30px rgba(0,0,0,.5);
+  color-scheme:dark;
+}
+
+/* 緊密版：只改字級與高度，顏色與形狀不變 */
+html.ds-compact{
+  --ds-fs-body:16px; --ds-fs-label:15px;
+  --ds-fs-table:16px; --ds-fs-th:14px; --ds-row-h:40px;
+  --ds-fs-h1:24px; --ds-fs-h2:20px; --ds-fs-h3:18px;
+  --ds-fs-kpi:32px; --ds-fs-hero:40px;
+  --ds-fs-fill:18px; --ds-h-fill:46px;
+}
+
+/* 匯出固定淺色票：放在要截圖／轉檔的容器上，裡面一律淺色 */
+.ds-export{
+  --ds-bg:#FFF9F2; --ds-surface:#FFFFFF; --ds-soft:#FFF4E8;
+  --ds-ink:#2D251A; --ds-body:#50412E; --ds-muted:#7A6953;
+  --ds-line:#ECDFCA; --ds-line2:#E1D2B8;
+  --ds-primary:#1576C0; --ds-on-primary:#FFFFFF; --ds-ring:rgba(61,165,245,.32);
+  --ds-ok:#0B7566; --ds-okbg:#E8F8F5; --ds-edit:#8a5d00; --ds-editbg:#FFF5DF;
+  --ds-no:#B83A2E; --ds-nobg:#FFECEC; --ds-pend:#A84A1C; --ds-pendbg:#FFF1E6;
+  --ds-hold:#6b47b3; --ds-holdbg:#F4EEFD;
+  --ds-shadow-card:0 4px 14px rgba(70,50,25,.06),0 1px 2px rgba(70,50,25,.03);
+  color-scheme:light;
+}

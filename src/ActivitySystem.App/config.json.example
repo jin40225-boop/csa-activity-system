@@ -1,0 +1,7 @@
+{
+  "dataPath": "..\\資料\\activity.db",
+  "filesDir": "..\\資料\\附件",
+  "templatesDir": "..\\範本",
+  "backupDir": "..\\備份",
+  "keepDailyBackups": 30
+}

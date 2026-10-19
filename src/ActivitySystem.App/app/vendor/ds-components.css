@@ -1,0 +1,170 @@
+/* ============================================================
+   設計規格 v1 · 元件（顏色、字級、尺寸、圓角一律讀 tokens.css 的變數）
+   先載入 tokens.css，再載入本檔。class 一律 ds- 開頭。
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+body.ds{margin:0;background:var(--ds-bg);color:var(--ds-body);font-family:var(--ds-font);
+  font-size:var(--ds-fs-body);line-height:var(--ds-lh);font-variant-numeric:tabular-nums}
+.ds h1{font-size:var(--ds-fs-h1);color:var(--ds-ink);margin:0 0 var(--ds-s2)}
+.ds h2{font-size:var(--ds-fs-h2);color:var(--ds-ink);margin:0 0 var(--ds-s3)}
+.ds h3{font-size:var(--ds-fs-h3);color:var(--ds-ink);margin:var(--ds-s4) 0 var(--ds-s2)}
+.ds-note{font-size:var(--ds-fs-min);color:var(--ds-muted)}
+.ds code{font-family:var(--ds-font-mono);font-size:var(--ds-fs-min);background:var(--ds-soft);padding:1px 6px;border-radius:6px;color:var(--ds-ink)}
+
+/* ── 頂列：系統名・身分膠囊・◐・版本號（R-12） */
+.ds-top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:var(--ds-s3);flex-wrap:wrap;
+  background:var(--ds-surface);border-bottom:var(--ds-bw) solid var(--ds-line);padding:var(--ds-s3) var(--ds-gutter)}
+.ds-top .ds-name{font-size:var(--ds-fs-h2);font-weight:800;color:var(--ds-ink)}
+.ds-top .ds-sp{flex:1}
+.ds-ver{font-family:var(--ds-font-mono);font-size:var(--ds-fs-min);color:var(--ds-muted);border:var(--ds-bw) dashed var(--ds-line2);
+  border-radius:var(--ds-r-pill);padding:2px 10px}
+.ds-who{font-size:var(--ds-fs-chip);font-weight:700;color:var(--ds-ink);background:var(--ds-soft);border:var(--ds-bw) solid var(--ds-line2);
+  border-radius:var(--ds-r-pill);padding:2px 12px}
+.ds-watermark{position:fixed;left:0;right:0;bottom:0;z-index:1;pointer-events:none;text-align:center;
+  font-family:var(--ds-font-mono);font-size:var(--ds-fs-min);color:var(--ds-muted);opacity:.55;padding:2px}
+
+/* ── 膠囊頁籤（不用左側選單），計數紅點 */
+.ds-tabs{display:flex;gap:var(--ds-s2);flex-wrap:wrap;padding:var(--ds-s3) var(--ds-gutter);background:var(--ds-soft);border-bottom:var(--ds-bw) solid var(--ds-line)}
+.ds-tab{font:inherit;font-size:var(--ds-fs-chip);font-weight:700;min-height:var(--ds-h-tab);padding:4px 18px;display:inline-flex;align-items:center;gap:var(--ds-s2);
+  border-radius:var(--ds-r-pill);border:var(--ds-bw) solid var(--ds-line2);background:var(--ds-surface);color:var(--ds-ink);cursor:pointer}
+.ds-tab.icon{min-height:var(--ds-h-tab-icon)}
+.ds-tab[aria-selected="true"]{background:var(--ds-ink);color:var(--ds-surface);border-color:var(--ds-ink)}
+.ds-count{display:inline-block;min-width:24px;height:24px;line-height:24px;padding:0 7px;border-radius:var(--ds-r-pill);
+  background:var(--ds-dot);color:#fff;font-size:var(--ds-fs-min);font-weight:800;text-align:center}
+
+/* ── 頁面主體：工作區不限寬，閱讀型上限 */
+.ds-main{padding:var(--ds-s5) var(--ds-gutter) 48px}
+.ds-read{max-width:var(--ds-read-max)}
+.ds-card{background:var(--ds-surface);border:var(--ds-bw) solid var(--ds-line);border-radius:var(--ds-r-card);
+  box-shadow:var(--ds-shadow-card);padding:var(--ds-s5) var(--ds-s6);margin:0 0 var(--ds-s5)}
+
+/* ── 問候橫幅：有待辦才醒目，沒有就安靜 */
+.ds-hero{border-radius:var(--ds-r-card);padding:var(--ds-s4) var(--ds-s5);margin:0 0 var(--ds-s4);display:flex;align-items:center;gap:var(--ds-s4);
+  background:var(--ds-soft);border:var(--ds-bw) solid var(--ds-line);color:var(--ds-ink)}
+.ds-hero .n{font-size:var(--ds-fs-hero);font-weight:800;line-height:1.1;color:var(--ds-ink)}
+.ds-hero.busy{background:var(--ds-editbg);border-color:var(--ds-sun)}
+
+/* ── 按鈕：膠囊、≥44、主按鈕一畫面只有一個（R-08） */
+.ds-btn{font:inherit;font-size:var(--ds-fs-btn);font-weight:700;min-height:var(--ds-h-btn);padding:6px 18px;
+  border-radius:var(--ds-r-pill);border:var(--ds-bw) solid var(--ds-line2);background:var(--ds-surface);color:var(--ds-ink);cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.ds-btn.primary{background:var(--ds-primary);border-color:var(--ds-primary);color:var(--ds-on-primary)}
+.ds-btn.sm{font-size:var(--ds-fs-btn-sm);min-height:var(--ds-h-btn-sm);padding:3px 14px}
+.ds-btn.big{font-size:var(--ds-fs-fill);min-height:var(--ds-h-fill);padding:8px 24px}
+.ds-btn .ds-btn-hint{display:block;font-size:var(--ds-fs-min);font-weight:400;opacity:.85}
+.ds-btn:disabled{opacity:.5;cursor:not-allowed}
+.ds-btn:hover:not(:disabled){border-color:var(--ds-sky)}
+
+/* ── 輸入框／下拉（下拉一定看得到 ▼）／勾選 */
+.ds-field{display:flex;flex-direction:column;gap:4px;margin:0 0 var(--ds-s3)}
+.ds-label{font-size:var(--ds-fs-label);font-weight:800;color:var(--ds-ink)}
+.ds-input,.ds-select select{font:inherit;font-size:var(--ds-fs-body);height:var(--ds-h-input);padding:7px 11px;
+  border:var(--ds-bw) solid var(--ds-line2);border-radius:var(--ds-r-input);background:var(--ds-surface);color:var(--ds-ink);min-width:0}
+.ds-input.big,.ds-select.big select{font-size:var(--ds-fs-fill);height:var(--ds-h-fill)}
+.ds-select{position:relative;display:inline-block}
+.ds-select select{appearance:none;-webkit-appearance:none;padding-right:38px;width:100%}
+.ds-select::after{content:"▼";position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:var(--ds-fs-min);color:var(--ds-muted);pointer-events:none}
+.ds-cb{width:var(--ds-cb);height:var(--ds-cb);accent-color:var(--ds-primary);margin:0}
+.ds-check{display:inline-flex;align-items:center;gap:var(--ds-s2);min-height:var(--ds-hit);font-size:var(--ds-fs-body);cursor:pointer}
+.ds-btn:focus-visible,.ds-tab:focus-visible,.ds-chip:focus-visible,.ds-input:focus,.ds-select select:focus,.ds-blk:focus-visible{
+  outline:3px solid var(--ds-ring);outline-offset:1px;border-color:var(--ds-sky)}
+/* 自動轉換與標黃（R-03）：照樣存，只提示 */
+.ds-converted{font-size:var(--ds-fs-min);color:var(--ds-ok)}
+.ds-flag{background:var(--ds-editbg)!important;border-color:var(--ds-sun)!important}
+.ds-flag-text{font-size:var(--ds-fs-min);color:var(--ds-edit);font-weight:700}
+/* 打名字候選（R-02、R-10：只露遮罩線索） */
+.ds-suggest{list-style:none;margin:4px 0 0;padding:4px;border:var(--ds-bw) solid var(--ds-sky);border-radius:var(--ds-r-input);
+  background:var(--ds-surface);box-shadow:var(--ds-shadow-window);max-width:520px}
+.ds-suggest li{padding:8px 12px;border-radius:10px;cursor:pointer;min-height:var(--ds-hit)}
+.ds-suggest li:hover,.ds-suggest li[aria-selected="true"]{background:var(--ds-soft)}
+.ds-suggest small{color:var(--ds-muted);font-size:var(--ds-fs-min)}
+
+/* ── 篩選膠囊 */
+.ds-chips{display:flex;gap:var(--ds-s2);flex-wrap:wrap}
+.ds-chip{font:inherit;font-size:var(--ds-fs-chip);font-weight:700;min-height:var(--ds-h-chip);padding:4px 14px;
+  border-radius:var(--ds-r-pill);border:var(--ds-bw) solid var(--ds-line2);background:var(--ds-surface);color:var(--ds-ink);cursor:pointer}
+.ds-chip[aria-pressed="true"],.ds-chip.on{background:var(--ds-ink);color:var(--ds-surface);border-color:var(--ds-ink)}
+
+/* ── 狀態章：字色＋底色成對 */
+.ds-badge{display:inline-flex;align-items:center;min-height:var(--ds-h-badge);padding:0 12px;border-radius:var(--ds-r-pill);
+  font-size:var(--ds-fs-badge);font-weight:800;white-space:nowrap}
+.ds-badge.ok{background:var(--ds-okbg);color:var(--ds-ok)}
+.ds-badge.edit{background:var(--ds-editbg);color:var(--ds-edit)}
+.ds-badge.no{background:var(--ds-nobg);color:var(--ds-no)}
+.ds-badge.pend{background:var(--ds-pendbg);color:var(--ds-pend)}
+.ds-badge.hold{background:var(--ds-holdbg);color:var(--ds-hold)}
+
+/* ── 數字卡：每格 ≥170，最多 5–7 格，點了直接篩 */
+.ds-kpis{display:flex;gap:var(--ds-s3);flex-wrap:wrap;margin:0 0 var(--ds-s4)}
+.ds-kpi{font:inherit;text-align:left;cursor:pointer;background:var(--ds-surface);border:var(--ds-bw) solid var(--ds-line);border-radius:var(--ds-r-card);
+  box-shadow:var(--ds-shadow-card);padding:var(--ds-s3) var(--ds-s4);min-width:var(--ds-kpi-min);color:var(--ds-body)}
+.ds-kpi .n{display:block;font-size:var(--ds-fs-kpi);font-weight:800;color:var(--ds-ink);line-height:1.1}
+.ds-kpi .l{display:block;font-size:var(--ds-fs-th);color:var(--ds-muted)}
+.ds-kpi.warn{background:var(--ds-editbg);border-color:var(--ds-sun)}
+.ds-kpi[aria-pressed="true"]{border-color:var(--ds-primary);box-shadow:0 0 0 3px var(--ds-ring)}
+
+/* ── 待處理橘框（R-07：預設照樣顯示，只多一個「只看這些」） */
+.ds-pendbox{border:var(--ds-bw-strong) solid var(--ds-pend);background:var(--ds-pendbg);border-radius:var(--ds-r-card);
+  padding:var(--ds-s3) var(--ds-s4);display:flex;gap:var(--ds-s3);align-items:center;flex-wrap:wrap;margin:0 0 var(--ds-s4)}
+.ds-pendbox b{color:var(--ds-pend);font-size:var(--ds-fs-h3)}
+.ds-pendbox .ds-sp{flex:1}
+tr.ds-pending td:first-child{box-shadow:inset 4px 0 0 var(--ds-pend)}
+
+/* ── 表格 */
+.ds-table{border-collapse:collapse;width:100%;font-size:var(--ds-fs-table)}
+.ds-table th{font-size:var(--ds-fs-th);color:var(--ds-muted);text-align:left;border-bottom:var(--ds-bw) solid var(--ds-line2);padding:8px}
+.ds-table td{border-bottom:1px solid var(--ds-line);padding:6px 8px;height:var(--ds-row-h);vertical-align:middle}
+.ds-table tr.ds-expand td{background:var(--ds-soft);height:auto;padding:var(--ds-s3) var(--ds-s4)}
+
+/* ── 區塊入口（與「全部」並存，記住上次） */
+.ds-blks{display:flex;gap:var(--ds-s3);flex-wrap:wrap}
+.ds-blk{font:inherit;text-align:left;cursor:pointer;border:var(--ds-bw) solid var(--ds-line2);border-radius:var(--ds-r-input);padding:6px 12px;
+  background:var(--ds-surface);min-width:150px;color:var(--ds-body)}
+.ds-blk b{display:block;font-size:var(--ds-fs-body);color:var(--ds-ink)}
+.ds-blk span{font-size:var(--ds-fs-min);color:var(--ds-muted)}
+.ds-blk[aria-pressed="true"]{border-color:var(--ds-primary);box-shadow:0 0 0 3px var(--ds-ring)}
+.ds-blk.all{border-style:dashed}
+
+/* ── 浮動視窗：可拖曳、不加遮罩、不鎖主畫面、沒有放大鈕；同時最多 4 個 */
+.ds-win{position:fixed;z-index:30;width:var(--ds-win-w);max-width:calc(100vw - 32px);max-height:calc(100vh - 96px);display:flex;flex-direction:column;
+  background:var(--ds-surface);border:var(--ds-bw) solid var(--ds-line2);border-radius:var(--ds-r-window);box-shadow:var(--ds-shadow-window)}
+.ds-win.work{width:var(--ds-win-w-work)}
+.ds-win.report{width:var(--ds-win-w-report)}
+.ds-win.front{border-color:var(--ds-sky);box-shadow:var(--ds-shadow-front);z-index:31}
+.ds-win-bar{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:var(--ds-bw) solid var(--ds-line);cursor:move;user-select:none}
+.ds-win-bar b{flex:1;font-size:var(--ds-fs-body);color:var(--ds-ink)}
+.ds-win-x{width:var(--ds-hit);height:var(--ds-hit);border-radius:10px;border:var(--ds-bw) solid var(--ds-line2);background:var(--ds-surface);
+  color:var(--ds-ink);font:inherit;font-size:var(--ds-fs-chip);cursor:pointer}
+.ds-win-body{padding:var(--ds-s3) var(--ds-s4);overflow:auto}
+.ds-win-foot{display:flex;gap:var(--ds-s2);justify-content:flex-end;align-items:center;padding:10px 14px;border-top:var(--ds-bw) solid var(--ds-line)}
+/* 左下工作列：收起的視窗 */
+.ds-dock{position:fixed;left:var(--ds-s4);bottom:28px;z-index:29;display:flex;gap:6px;flex-wrap:wrap}
+.ds-dock button{font:inherit;font-size:var(--ds-fs-min);min-height:var(--ds-hit);border:var(--ds-bw) dashed var(--ds-line2);border-radius:var(--ds-r-input);
+  padding:2px 12px;background:var(--ds-surface);color:var(--ds-ink);cursor:pointer;box-shadow:var(--ds-shadow-card)}
+
+/* ── 提示（R-06：失敗紅色不自動消失；成功 3 秒） */
+.ds-toasts{position:fixed;right:var(--ds-s4);bottom:28px;z-index:9999;display:flex;flex-direction:column;gap:var(--ds-s2);max-width:440px}
+.ds-toast{border-radius:var(--ds-r-card);padding:var(--ds-s3) var(--ds-s4);box-shadow:var(--ds-shadow-window);display:flex;gap:var(--ds-s3);align-items:flex-start;
+  border:var(--ds-bw) solid var(--ds-line2);background:var(--ds-surface);color:var(--ds-ink)}
+.ds-toast.ok{background:var(--ds-okbg);color:var(--ds-ok);border-color:var(--ds-ok)}
+.ds-toast.err{background:var(--ds-nobg);color:var(--ds-no);border-color:var(--ds-no);font-weight:700}
+.ds-toast .ds-sp{flex:1}
+
+/* ── 暫存列（R-05 第二級：還有 N 處沒存） */
+.ds-unsaved{position:sticky;bottom:0;z-index:15;display:flex;gap:var(--ds-s3);align-items:center;padding:var(--ds-s3) var(--ds-s4);
+  background:var(--ds-editbg);border:var(--ds-bw) solid var(--ds-sun);border-radius:var(--ds-r-card);color:var(--ds-edit);font-weight:700}
+.ds-unsaved .ds-sp{flex:1}
+
+/* ── 小工具 */
+.ds-row{display:flex;gap:var(--ds-s3);flex-wrap:wrap;align-items:center}
+.ds-sp{flex:1}
+.ds-hidden{display:none!important}
+
+@media (max-width:900px){
+  .ds-win,.ds-win.work,.ds-win.report{width:calc(100vw - 32px)}
+}
+@media print{
+  .ds-top,.ds-tabs,.ds-dock,.ds-toasts,.ds-win,.ds-watermark,.ds-unsaved{display:none!important}
+  body.ds{background:#fff;color:#000}
+  .ds-card{box-shadow:none;break-inside:avoid}
+}

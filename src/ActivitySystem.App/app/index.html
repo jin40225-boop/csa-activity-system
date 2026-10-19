@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>活動與教育訓練系統</title>
+<link rel="stylesheet" href="vendor/ds-tokens.css">
+<link rel="stylesheet" href="vendor/ds-components.css">
+<link rel="stylesheet" href="vendor/cms-kit.css">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body class="ds cms-root">
+<div class="app-boot" id="boot">正在連線資料庫…</div>
+<header class="top" id="top" hidden>
+  <span class="nm"><i><img src="art/megaphone.png" alt="" style="width:30px;height:30px"></i>活動與教育訓練系統</span>
+  <div class="find"><input id="find" placeholder="找場次、學校、講師（Ctrl+K）" autocomplete="off" aria-label="搜尋"><div class="res" id="findRes" hidden></div></div>
+  <span class="sp"></span>
+  <span class="demo-chip" id="demoChip" hidden title="尚未接上的功能用模擬按鈕與假資料展示">🎬 示範模式</span>
+  <span class="sync" id="sync" title="三台電腦的資料會自動同步">● 已同步</span>
+  <span class="who" id="who"></span>
+  <button class="ds-btn sm" id="btnTheme" aria-label="切換深淺色">◐</button>
+  <span class="ver" id="ver"></span>
+</header>
+<nav class="tabs" id="tabs" hidden aria-label="功能頁籤">
+  <button class="ds-tab" data-tab="sess"><img class="ico" src="art/calendar.png" alt="" style="width:24px;height:24px">場次管理 <span class="ds-count" id="cntSess" hidden>0</span></button>
+  <button class="ds-tab" data-tab="home"><img class="ico" src="art/kanban.png" alt="" style="width:24px;height:24px">總覽</button>
+  <button class="ds-tab" data-tab="report"><img class="ico" src="art/document.png" alt="" style="width:24px;height:24px">成果報告書</button>
+  <button class="ds-tab" data-tab="ros"><img class="ico" src="art/database.png" alt="" style="width:24px;height:24px">名冊</button>
+  <button class="ds-tab" data-tab="mail"><img class="ico" src="art/mail.png" alt="" style="width:24px;height:24px">信件總覽 <span class="ds-count" id="cntMail" hidden>0</span></button>
+  <button class="ds-tab" data-tab="set"><img class="ico" src="art/settings.png" alt="" style="width:24px;height:24px">設定</button>
+</nav>
+<main id="main" hidden></main>
+<script src="vendor/cms-kit.js"></script>
+<script src="core.js"></script>
+<script src="sess.js"></script>
+<script src="windows.js"></script>
+<script src="demo.js"></script>
+<script src="views.js"></script>
+<script src="report.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

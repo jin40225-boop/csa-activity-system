@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ActivitySystem.App/ActivitySystem.App.csproj" />
+    <Project Path="src/ActivitySystem.Core/ActivitySystem.Core.csproj" />
+  </Folder>
+</Solution>
